@@ -66,3 +66,10 @@ En este modo, la herramienta debe emitir cada hora:
 - El número de líneas en el archivo y la cantidad de nombres de host pueden ser **muy grandes**.
 - La solución debe ser eficiente en términos de uso de **CPU y memoria**.
 - Puedes hacer suposiciones razonables, pero deben estar **claramente documentadas**.
+
+---
+## Requisitos
+Usa Python 3.7. o superior
+Escribe código conforme a PEP8.
+Escribe algunas pruebas (considera usar pytest o uniitest).
+Documenta tu solución en un archivo.
