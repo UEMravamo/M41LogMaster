@@ -69,7 +69,7 @@ En este modo, la herramienta debe emitir cada hora:
 
 ---
 ## Requisitos
-Usa Python 3.7. o superior
-Escribe código conforme a PEP8.
-Escribe algunas pruebas (considera usar pytest o uniitest).
-Documenta tu solución en un archivo.
+- Usa Python 3.7. o superior
+- Escribe código conforme a PEP8.
+- Escribe algunas pruebas (considera usar pytest o uniitest).
+- Documenta tu solución en un archivo.
