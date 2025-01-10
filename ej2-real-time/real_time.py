@@ -1,0 +1,46 @@
+# Funciones y código del ejercicio 2 -> real-time
+import os
+import time
+from datetime import datetime, timedelta
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+from pyspark.sql import functions as F
+
+class LogFileHandler(FileSystemEventHandler):
+    def __init__(self, df_log, hostname):
+        self.df_log = df_log
+        self.hostname = hostname.lower()
+        self.last_timestamp = int((datetime.now() - timedelta(hours=1)).timestamp() * 1000)
+
+    def process_logs(self):
+
+        df_last_hour = self.df_log.filter(F.col("timestamp") >= self.last_timestamp)
+
+        connected_to_host = df_last_hour.filter(
+            F.lower(F.col("hostname_destino")) == self.hostname
+        ).select("hostname_origen").distinct()
+
+        connected_from_host = df_last_hour.filter(
+            F.lower(F.col("hostname_origen")) == self.hostname
+        ).select("hostname_destino").distinct()
+
+        most_connections = df_last_hour.groupBy("hostname_origen").count().orderBy(
+            F.col("count").desc()
+        ).limit(1)
+
+        print("\n--- Resultados de la última hora ---")
+        print("Hostnames conectados al host configurado:")
+        connected_to_host.show()
+
+        print("Hostnames que recibieron conexiones del host configurado:")
+        connected_from_host.show()
+
+        print("Hostname con más conexiones en la última hora:")
+        most_connections.show()
+
+        self.last_timestamp = int((datetime.now() - timedelta(hours=1)).timestamp() * 1000)
+
+    def on_modified(self, event):
+        if event.src_path == self.input_file:
+            print(f"Archivo modificado: {event.src_path}")
+            self.process_logs()

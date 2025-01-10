@@ -24,3 +24,6 @@ def verificar_archivo(input_file):
     if not os.path.exists(input_file):
         print(f'El archivo introducido: {input_file} no existe')
         sys.exit(1)
+        
+def cargar_datos_csv(spark, input_file, schema):
+    return spark.read.schema(schema).csv(input_file, sep=" ", header=False)

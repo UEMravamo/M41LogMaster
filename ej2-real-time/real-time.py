@@ -1,1 +1,0 @@
-# Funciones y código del ejercicio 2 -> real-time
