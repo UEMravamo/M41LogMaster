@@ -1,0 +1,1 @@
+# Funciones y código del ejercicio 1 -> análisis logs

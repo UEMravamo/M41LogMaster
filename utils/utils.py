@@ -1,0 +1,1 @@
+#Archivo de funciones comunes a los dos ejercicios
