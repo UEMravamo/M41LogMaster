@@ -2,7 +2,6 @@
 import os
 import sys
 from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
 from pyspark.sql.types import StructType, StructField, LongType, StringType
 
 def crear_sesion_spark(app_name, memoria_ejecutor, memoria_driver, particiones_shuffle):
