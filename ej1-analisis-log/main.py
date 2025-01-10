@@ -6,7 +6,7 @@ from analisis_log import analisis_log
 
 
 def main():
-    inputFile = './input-file-10000.txt'
+    inputFile = '../input-file-10000.txt'
     init_datetime = 'Martes, 13 de agosto de 2019 01:00:00'
     end_datetime = 'Martes, 13 de agosto de 2019 21:00:00'
     target_host = 'Savhannah'
