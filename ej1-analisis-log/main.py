@@ -1,9 +1,9 @@
 # Main del ejercicio 1
 import sys
 import os
-from analisis_log import analisis_log 
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
+from analisis_log import analisis_log 
 
 
 def main():

@@ -1,24 +1,35 @@
 import unittest
-from analisis_log import analisis_log
+import sys
+import os
 
-def test_analisis_log():
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
+from analisis_log import analisis_log 
+
+
+class TestAnalisisLog(unittest.TestCase):
     """
-    Prueba unitaria para la función analisis_log.
+    Clase de prueba para la función analisis_log.
     """
-    # Parámetros de prueba
-    input_file = '../input-file-10000.txt'
-    init_datetime = 'Martes, 13 de agosto de 2019 01:00:00'
-    end_datetime = 'Martes, 13 de agosto de 2019 21:00:00'
-    target_host = 'Savhannah'
 
-    # Resultado esperado
-    expected_result = [
-        'Deyshawn', 'Rumaldo', 'Jaylien', 'Zarriyah', 'Shaynee',
-        'Demarius', 'Borna', 'Elmir', 'Michelene', 'Ajee', 'Tanisha'
-    ]
+    def test_analisis_log(self):
+        """
+        Prueba unitaria para la función analisis_log.
+        """
 
-    # Llamada a la función
-    result = analisis_log(input_file, init_datetime, end_datetime, target_host)
+        input_file = '../input-file-10000.txt'
+        init_datetime = 'Martes, 13 de agosto de 2019 01:00:00'
+        end_datetime = 'Martes, 13 de agosto de 2019 21:00:00'
+        target_host = 'Savhannah'
 
-    # Validación del resultado
-    assert result == expected_result, f"Error: Resultado inesperado {result}"
+        expected_result = [
+            'Deyshawn', 'Rumaldo', 'Jaylien', 'Zarriyah', 'Shaynee',
+            'Demarius', 'Borna', 'Elmir', 'Michelene', 'Ajee', 'Tanisha'
+        ]
+
+        result = analisis_log(input_file, init_datetime, end_datetime, target_host)
+
+        self.assertEqual(result, expected_result)
+
+
+if __name__ == "__main__":
+    unittest.main()
