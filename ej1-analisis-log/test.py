@@ -68,6 +68,44 @@ class TestAnalisisLog(unittest.TestCase):
         expected_result = []
         result = analisis_log(input_file, init_datetime, end_datetime, target_host)
         self.assertEqual(result, expected_result)
+    def test_case5(self):
+        """
+        Quinta prueba unitaria para la función analisis_log.
+        """
+        input_file = "../input-file-10000.txt"
+        init_datetime = "Martes, 13 de agosto de 2019 01:00:00"
+        end_datetime = "Martes, 13 de agosto de 2019 21:00:00"
+        target_host = "Tyreonna"
+
+        expected_result = []
+        result = analisis_log(input_file, init_datetime, end_datetime, target_host)
+        self.assertEqual(result, expected_result)
+
+    def test_case6(self):
+        """
+        Prueba con un rango de tiempo al borde de los registros existentes.
+        """
+        input_file = "../input-file-10000.txt"
+        init_datetime = "Martes, 13 de agosto de 2019 01:00:00"
+        end_datetime = "Martes, 13 de agosto de 2019 02:00:00"
+        target_host = "Heera"
+
+        expected_result = ["Reneisha"]
+        result = analisis_log(input_file, init_datetime, end_datetime, target_host)
+        self.assertEqual(result, expected_result)
+
+    def test_case7(self):
+        """
+        Última prubea unitaria para la función analisis_log.
+        """
+        input_file = "../input-file-10000.txt"
+        init_datetime = "Martes, 13 de agosto de 2019 01:00:00"
+        end_datetime = "Martes, 13 de agosto de 2019 21:00:00"
+        target_host = "Jeremyah"
+
+        expected_result = ["Ahmira"]
+        result = analisis_log(input_file, init_datetime, end_datetime, target_host)
+        self.assertEqual(result, expected_result)
 
 
 if __name__ == "__main__":
