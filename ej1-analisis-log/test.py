@@ -13,7 +13,7 @@ class TestAnalisisLog(unittest.TestCase):
 
     def test_analisis_log(self):
         """
-        Prueba unitaria para la función analisis_log.
+        Primera prueba unitaria para la función analisis_log.
         """
 
         input_file = '../input-file-10000.txt'
@@ -28,6 +28,45 @@ class TestAnalisisLog(unittest.TestCase):
 
         result = analisis_log(input_file, init_datetime, end_datetime, target_host)
 
+        self.assertEqual(result, expected_result)
+
+    def test_case2(self):
+        """
+        Segunda prueba unitaria para la función analisis_log.
+        """
+        input_file = "../input-file-10000.txt"
+        init_datetime = "Martes, 13 de agosto de 2019 10:00:00"
+        end_datetime = "Martes, 13 de agosto de 2019 12:00:00"
+        target_host = "Keimy"
+
+        expected_result = []
+        result = analisis_log(input_file, init_datetime, end_datetime, target_host)
+        self.assertEqual(result, expected_result)
+
+    def test_case3(self):
+        """
+        Prueba con un hostname no presente en los datos.
+        """
+        input_file = "../input-file-10000.txt"
+        init_datetime = "Martes, 13 de agosto de 2019 01:00:00"
+        end_datetime = "Martes, 13 de agosto de 2019 21:00:00"
+        target_host = "Inexistente"
+
+        expected_result = []
+        result = analisis_log(input_file, init_datetime, end_datetime, target_host)
+        self.assertEqual(result, expected_result)
+
+    def test_case4(self):
+        """
+        Prueba con un rango de tiempo que no incluye registros.
+        """
+        input_file = "../input-file-10000.txt"
+        init_datetime = "Lunes, 12 de agosto de 2019 01:00:00"
+        end_datetime = "Lunes, 12 de agosto de 2019 21:00:00"
+        target_host = "Aadvik"
+
+        expected_result = []
+        result = analisis_log(input_file, init_datetime, end_datetime, target_host)
         self.assertEqual(result, expected_result)
 
 
