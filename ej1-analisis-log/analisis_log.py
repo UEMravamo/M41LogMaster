@@ -2,12 +2,7 @@
 from pyspark.sql import functions as F
 from datetime import datetime
 import locale
-from utils.utils import crear_sesion_spark, definir_esquema, verificar_archivo
-
-
-def cargar_datos_csv(spark, input_file, schema):
-    return spark.read.schema(schema).csv(input_file, sep=" ", header=False)
-
+from utils.utils import crear_sesion_spark, definir_esquema, verificar_archivo, cargar_datos_csv
 
 def configurar_locale():
     try:
@@ -27,29 +22,6 @@ def filtrar_datos_por_tiempo(df, init_timestamp, end_timestamp):
         (F.col("timestamp") >= init_timestamp) &
         (F.col("timestamp") <= end_timestamp)
     )
-
-
-def filtrar_por_hostname(df, hostname):
-    target_host = hostname.lower()
-    return df.filter(
-        (F.lower(F.col("hostname_origen")) == target_host) |
-        (F.lower(F.col("hostname_destino")) == target_host)
-    )
-
-
-def obtener_hosts_conectados(df, hostname):
-    target_host = hostname.lower()
-    df_distinct_origin_host = df.filter(
-        F.lower(F.col('hostname_origen')) != target_host
-    ).select(F.col('hostname_origen').alias('host'))
-
-    df_distinct_destino_host = df.filter(
-        F.lower(F.col('hostname_destino')) != target_host
-    ).select(F.col('hostname_destino').alias('host'))
-
-    df_result = df_distinct_origin_host.unionByName(
-        df_distinct_destino_host).distinct()
-    return [row['host'] for row in df_result.toLocalIterator()]
 
 
 def filtrar_por_hostname(df, hostname):
