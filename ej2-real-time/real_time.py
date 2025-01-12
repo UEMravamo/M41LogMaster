@@ -48,7 +48,7 @@ class LogFileHandler(FileSystemEventHandler):
             self.process_logs()
 
 def monitor_log_file(input_file, df_log, hostname):
-    event_handler = LogFileHandler(df_log, hostname)
+    event_handler = LogFileHandler(input_file, df_log, hostname)
     observer = Observer()
     observer.schedule(event_handler, path=os.path.dirname(input_file), recursive=False)
     observer.start()
