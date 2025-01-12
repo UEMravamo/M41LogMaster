@@ -8,7 +8,8 @@ from pyspark.sql import functions as F
 from utils.utils import crear_sesion_spark, definir_esquema, verificar_archivo, cargar_datos_csv
 
 class LogFileHandler(FileSystemEventHandler):
-    def __init__(self, df_log, hostname):
+    def __init__(self, input_file, df_log, hostname):
+        self.input_file = input_file
         self.df_log = df_log
         self.hostname = hostname.lower()
         self.last_timestamp = int((datetime.now() - timedelta(hours=1)).timestamp() * 1000)
