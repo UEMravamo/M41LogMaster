@@ -22,7 +22,7 @@ class LogFileHandler(FileSystemEventHandler):
 
         df_last_hour = self.df_log.filter(
             F.col("timestamp") >= self.last_timestamp)
-        df_last_hour.show()
+
         connected_to_host = df_last_hour.filter(
             F.lower(F.col("hostname_destino")) == self.hostname
         ).select("hostname_origen").distinct()
