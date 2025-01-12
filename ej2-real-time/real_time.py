@@ -46,12 +46,12 @@ class LogFileHandler(FileSystemEventHandler):
             print(f"Archivo modificado: {event.src_path}")
             self.process_logs()
 
-def monitor_log_file(df_log, hostname):
+def monitor_log_file(input_file, df_log, hostname):
     event_handler = LogFileHandler(df_log, hostname)
     observer = Observer()
-    observer.schedule(event_handler, path=os.path.dirname(df_log), recursive=False)
+    observer.schedule(event_handler, path=os.path.dirname(input_file), recursive=False)
     observer.start()
-    print(f"Monitorizando cambios en {df_log}...")
+    print(f"Monitorizando cambios en {input_file}...")
     try:
         while True:
             time.sleep(1)
@@ -65,6 +65,6 @@ def real_time(input_file, hostname):
     spark = crear_sesion_spark("realtime", "4g", "4g", "200")
     schema = definir_esquema()
     df_log_csv = cargar_datos_csv(spark, input_file, schema)
-    monitor_log_file(df_log_csv, hostname)
+    monitor_log_file(input_file, df_log_csv, hostname)
 
     spark.stop()

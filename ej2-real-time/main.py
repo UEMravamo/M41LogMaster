@@ -6,3 +6,6 @@ def main():
     input_file = './input-file-10000.txt'
     hostname = 'Prueba'
     real_time(input_file, hostname)
+    
+if __name__ == "__main__":
+    main()
